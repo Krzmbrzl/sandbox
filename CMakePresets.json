@@ -2,15 +2,15 @@
 	"version": 6,
 	"configurePresets": [
 		{
-			"name": "modules",
+			"name": "default",
 			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/build/modules",
-			"cacheVariables": {
-				"DIRS_TO_BUILD": {
-					"type": "STRING",
-					"value": "modules"
-				}
-			}
+			"binaryDir": "${sourceDir}/build"
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "default",
+			"configurePreset": "default"
 		}
 	]
 }
