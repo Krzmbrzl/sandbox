@@ -1,0 +1,26 @@
+name: Build
+
+on: [push, pull_request]
+
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-24.04', 'macos-14', 'windows-2022']
+        component: ['modules']
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: lukka/get-cmake@latest
+
+    - uses: lukka/run-cmake@v10
+      with:
+        configurePreset: default
+        buildPreset: default
+        configurePresetAdditionalArgs: "['-DDIRS_TO_BUILD=\"${{ matrix.component }}\"']"
+
