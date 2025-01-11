@@ -76,3 +76,7 @@ path of the respective binary. On Ubuntu (Debian) this is part of the `clang-too
 
 [Clangd](https://clangd.llvm.org/) does not yet support modules officially (see [feature request](https://github.com/clangd/clangd/issues/1293)).
 However, there exists experimental module support in Clangd v19 that can be enabled via the `--experimental-modules-support` CLI flag.
+
+In order for Clangd to work properly with modules, you have to compile your code with Clang so that the `compile_commands.json` file contains the
+correct Clang-specific flags and (probably even more important) the binary module interface (BMI) files that are created during compilation being in a
+format that Clangd understands.
