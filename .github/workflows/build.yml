@@ -37,7 +37,7 @@ jobs:
       with:
         configurePreset: default
         buildPreset: default
-        configurePresetAdditionalArgs: "['-DDIRS_TO_BUILD=\"${{ matrix.component }}\"']"
+        configurePresetAdditionalArgs: "['-DDIRS_TO_BUILD=${{ matrix.component }}']"
       env:
         VCPKG_ROOT: ''
 
