@@ -62,8 +62,17 @@ The implementation status of modules in different compilers still varies and is 
     - Importable module files have to have file extension `.cppm`, `.ccm`, `.cxxm` or `c++m`
 - MSVC:
     - Module interface units should have file extension `.ixx`
+- Apple Clang: No module support whatsoever
 
 Additionally, CMake also doesn't support modules for all generators. Most notably, the `Unix Makefiles` generator **does not support modules**.
 Instead, only the `Ninja` and `Visual Studio` generators are supported at the moment. In order for Clang to work with cmake, `clang-scan-deps` needs
 to be installed separately. This binary either needs to be in `PATH` or one has to set the `CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS` CMake variable to the
 path of the respective binary. On Ubuntu (Debian) this is part of the `clang-tools` package.
+
+
+## Tooling support
+
+### Clangd
+
+[Clangd](https://clangd.llvm.org/) does not yet support modules officially (see [feature request](https://github.com/clangd/clangd/issues/1293)).
+However, there exists experimental module support in Clangd v19 that can be enabled via the `--experimental-modules-support` CLI flag.
