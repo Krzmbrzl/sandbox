@@ -8,19 +8,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['ubuntu-24.04', 'macos-14', 'windows-2022']
         component: ['modules']
+        os: ['ubuntu-24.04', 'macos-14', 'windows-2022']
+        compiler: ['gcc-14', 'llvm-18', 'msvc']
+        exclude:
+          - os: 'windows-2022'
+            compiler: 'gcc-14'
+          - os: 'windows-2022'
+            compiler: 'llvm-18'
+          - os: 'ubuntu-24.04'
+            compiler: 'msvc'
+          - os: 'macos-14'
+            compiler: 'msvc'
 
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
 
-    - uses: lukka/get-cmake@latest
+    - uses: aminya/setup-cpp@v1
+      with:
+        compiler: ${{ matrix.compiler }}
+        vcvarsall: ${{ contains(matrix.os, 'windows') }}
+        cmake: true
+        ninja: true
 
     - uses: lukka/run-cmake@v10
       with:
         configurePreset: default
         buildPreset: default
         configurePresetAdditionalArgs: "['-DDIRS_TO_BUILD=\"${{ matrix.component }}\"']"
+      env:
+        VCPKG_ROOT: ''
 
