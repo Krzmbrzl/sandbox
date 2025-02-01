@@ -69,6 +69,10 @@ Instead, only the `Ninja` and `Visual Studio` generators are supported at the mo
 to be installed separately. This binary either needs to be in `PATH` or one has to set the `CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS` CMake variable to the
 path of the respective binary. On Ubuntu (Debian) this is part of the `clang-tools` package.
 
+Finally, as of CMake 3.31, compiler provided modules (such as `std`) are not yet supported (see the 
+[limitations](https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html#limitations) section in the docs). That means, no `import std;` for
+the time being (without manually providing workarounds at least).
+
 
 ## Tooling support
 
